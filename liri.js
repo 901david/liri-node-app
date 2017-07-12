@@ -11,6 +11,9 @@
             tweetThis();
             console.log(process.argv);
           }
+          else if (vari === "spotify-this-song") {
+            spotifyThis();
+          }
         };
         // This function will show my most recent tweets
         function myTweets () {
@@ -42,3 +45,15 @@
         }
       };
   // This section will control Spotify Functionality
+  var spotify = require('spotify');
+  function spotifyThis (vari) {
+    console.log(process.argv);
+spotify.search({ type: 'artist OR album OR track', query: process.argv[3] }, function(err, data) {
+if ( err ) {
+  console.log('Error occurred: ' + err);
+  return;
+}
+
+console.log(data);
+});
+};
