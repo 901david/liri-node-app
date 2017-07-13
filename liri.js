@@ -45,15 +45,13 @@ var argTwo = process.argv[3];
         whatToShow (argOne);
 // This section will allow Twitter posts
       function tweetThis (vari) {
-
-
         var T = new Twitter(keyLink.twitKeys);
         var tweet = {
-        status: (argTwo || "Gettin' it done!! #funtimes") }
+        status: (argTwo) }
         T.post('statuses/update', tweet, tweeted)
         function tweeted(err, data, response) {
         if(err){
-        console.log("Something went wrong!");
+        console.log("Something went wrong! Maybe try adding in text for your tweet.");
         }
         else{
         console.log("Your tweet went through!  It has been posted to @scriptscrawler's feed.");
