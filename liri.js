@@ -1,3 +1,5 @@
+var argOne = process.argv[2];
+var argTwo = process.argv[3];
 // This section controls Twitter Functionality
         var keyLink = require("./keys.js");
         // console.log(process.argv);
@@ -9,7 +11,7 @@
           }
           else if (vari === "tweet-this") {
             tweetThis();
-            console.log(process.argv);
+
           }
           else if (vari === "spotify-this-song") {
             spotifyThis();
@@ -40,21 +42,21 @@
           }
         });
         };
-        whatToShow (process.argv[2]);
+        whatToShow (argOne);
 // This section will allow Twitter posts
       function tweetThis (vari) {
 
 
         var T = new Twitter(keyLink.twitKeys);
         var tweet = {
-        status: (process.argv[3] || "Gettin' it done!! #funtimes") }
+        status: (argTwo || "Gettin' it done!! #funtimes") }
         T.post('statuses/update', tweet, tweeted)
         function tweeted(err, data, response) {
         if(err){
         console.log("Something went wrong!");
         }
         else{
-        console.log("Voila It worked!");
+        console.log("Your tweet went through!  It has been posted to @scriptscrawler's feed.");
         }
         }
       };
@@ -65,7 +67,7 @@
   var spotify = new Spotify(keyLink.spotty);
 
 
-  spotify.search({ type: 'track', query: (process.argv[3] || "All the Small Things") }, function(err, data) {
+  spotify.search({ type: 'track', query: (argTwo || "All the Small Things") }, function(err, data) {
     if (err) {
       return console.log('Error occurred: ' + err);
     }
@@ -84,7 +86,7 @@
 };
 function movieRequest () {
 var request = require("request");
-searchCrit = process.argv[3] || "Mr.+Nobody";
+searchCrit = argTwo || "Mr.+Nobody";
 request('http://www.omdbapi.com/?apikey=40e9cece&t=' + searchCrit, function (error, response, body) {
   // console.log('error:', error); // Print the error if one occurred
   // console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
