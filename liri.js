@@ -73,7 +73,17 @@ var argTwo = process.argv[3];
     for (var outside in data) {
       // console.log(data[outside].items);
       for (var i = 0; i < (data[outside].items).length; i++) {
-        console.log((data[outside].items)[i]);
+        var data = (data[outside].items)[i];
+        // console.log(data);
+        console.log("Artist: " + data.artists[0].name);
+        console.log("Album: " + data.album.name);
+        console.log("Song Name: " + data.name);
+        if (!(data.preview_url === "null")) {
+        console.log("Link to Preview: " + data.preview_url);
+      }
+
+        console.log("Popularity Rating: " + data.popularity);
+
       }
     };
 
