@@ -36,7 +36,7 @@
 
         var T = new Twitter(keyLink.twitKeys);
         var tweet = {
-        status: process.argv[3] }
+        status: (process.argv[3] || "Gettin' it done!! #funtimes") }
         T.post('statuses/update', tweet, tweeted)
         function tweeted(err, data, response) {
         if(err){
@@ -48,15 +48,20 @@
         }
       };
   // This section will control Spotify Functionality
-  var spotify = require('spotify');
-  function spotifyThis () {
-    var searchQueer = (process.argv[3]);
-spotify.search({ type: 'track', query: searchQueer }, function(err, data) {
-if ( err ) {
-  console.log('Error occurred: ' + err);
-  return;
-}
 
-console.log(data);
-});
+  function spotifyThis () {
+  var Spotify = require('node-spotify-api');
+  var spotify = new Spotify(keyLink.spotty);
+
+
+  spotify.search({ type: 'track', query: (process.argv[3] || "All the Small Things") }, function(err, data) {
+    if (err) {
+      return console.log('Error occurred: ' + err);
+    }
+    for (var key in data) {
+      console.log("key: " + key + " value: " + data[key]);
+    }
+
+  });
+
 };
