@@ -1,5 +1,5 @@
 
-console.log("Connected:");
+
 exports.twitKeys = {
   consumer_key: 'aDKfzHMmLYQ9KjyMoSvfu9kcL',
   consumer_secret: 'uItUlthmNcBMUr7zYRSAJPjyG8mXRFNNAkHVJ1ixHzbCvs8d32',

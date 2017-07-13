@@ -25,10 +25,18 @@
         function myTweets () {
         var client = new Twitter(keyLink.twitKeys);
 
-        var params = {screen_name: 'nodejs'};
+        var params = {screen_name: 'scriptscrawler', count: 20};
         client.get('statuses/user_timeline', params, function(error, tweets, response) {
           if (!error) {
-            console.log(tweets);
+            // console.log(tweets);
+            var tweetData = tweets;
+            for (var i = 0; i < tweetData.length; i++) {
+              console.log("@" + tweetData[i].user.screen_name + " Tweeted Out:");
+              console.log('"' + tweetData[i].text + '"');
+              console.log("Tweeted out on: " + tweetData[i].created_at);
+              console.log("This has been retweeted " + tweetData[i].retweet_count + " times.");
+            }
+
           }
         });
         };
