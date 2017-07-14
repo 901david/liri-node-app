@@ -42,9 +42,13 @@ var twitterTweetCount = 20;
               console.log('"' + tweetData[i].text + '"');
               console.log("Tweeted out on: " + tweetData[i].created_at);
               console.log("This has been retweeted " + tweetData[i].retweet_count + " times.");
-              logArray.push("@" + tweetData[i].user.screen_name + " Tweeted Out:")
+              logArray.push("@" + tweetData[i].user.screen_name + " Tweeted Out:\n")
+              logArray.push('"' + tweetData[i].text + '"\n')
+              logArray.push("Tweeted out on: " + tweetData[i].created_at+ "\n")
+              logArray.push("This has been retweeted " + tweetData[i].retweet_count + " times.\n")
 
             }
+            
             fs.appendFile('log.txt', logArray, function (err) {
             if (err) {
               console.log(err);
