@@ -1,6 +1,16 @@
-
-Artist: Ace of Base
-,Album: The Sign (US Album) [Remastered]
-,Song Name: The Sign
-,Link to Preview: https://p.scdn.co/mp3-preview/4c463359f67dd3546db7294d236dd0ae991882ff?cid=e20daef331a8412aaa88172ddb0e02d9
-,Popularity Rating: 66
+Title: Straight Outta Compton
+Year: 2015
+Country Produced In: USA
+Plot: The group NWA emerges from the mean streets of Compton in Los Angeles, California, in the mid-1980s and revolutionizes Hip Hop culture with their music and tales about life in the hood.
+Actors/Actresses: O'Shea Jackson Jr., Corey Hawkins, Jason Mitchell, Neil Brown Jr.
+Rating: R
+Language: English
+Rotten Tomatoes URL: http://www.rottentomatoes.com/m/straight_outta_compton/
+@scriptscrawler Tweeted Out:
+Tweeted out on: Fri Jul 14 17:32:20 +0000 2017
+"Should be last test"
+This has been retweeted 0 times.
+Artist: Lil Wayne
+Album: I Am Not A Human Being
+Song Name: Bill Gates
+Popularity Rating: 54

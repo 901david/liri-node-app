@@ -6,6 +6,15 @@ var keyLink = require("./keys.js");
 var Spotify = require('node-spotify-api');
 var Twitter = require('twitter');
 var fs = require("fs");
+var liriBotTriggered = false;
+// This function will write items to teh log.txt
+function writeThis (textArg) {
+  fs.appendFile('log.txt', textArg, function (err) {
+    if (err) {
+      console.log(err);
+    }
+  });
+};
 // This function determines what you are entering and then performs that task
 function whatToShow (vari) {
   if (vari === "my-tweets") {
@@ -37,32 +46,26 @@ function myTweets () {
     if (!error) {
       // console.log(tweets);
       var tweetData = tweets;
+      if (liriBotTriggered) {
+        console.log("Look you really did Tweet it out: ");
+      }
       for (var i = 0; i < tweetData.length; i++) {
         console.log("@" + tweetData[i].user.screen_name + " Tweeted Out:");
+        writeThis("@" + tweetData[i].user.screen_name + " Tweeted Out:\n");
         console.log('"' + tweetData[i].text + '"');
+        writeThis('"' + tweetData[i].text + '"\n');
         console.log("Tweeted out on: " + tweetData[i].created_at);
+        writeThis("Tweeted out on: " + tweetData[i].created_at+ "\n");
         console.log("This has been retweeted " + tweetData[i].retweet_count + " times.");
-        logArray.push("@" + tweetData[i].user.screen_name + " Tweeted Out:\n")
-        logArray.push('"' + tweetData[i].text + '"\n')
-        logArray.push("Tweeted out on: " + tweetData[i].created_at+ "\n")
-        logArray.push("This has been retweeted " + tweetData[i].retweet_count + " times.\n")
-
+        writeThis("This has been retweeted " + tweetData[i].retweet_count + " times.\n");
       }
-
-      fs.appendFile('log.txt', logArray, function (err) {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log("Review the log.txt file to see a log of your actions");
-        }
-      });
+      console.log("Review the log.txt file to see a log of your actions");
     }
   });
 };
 whatToShow (argOne);
 // This section will allow Twitter posts
 function tweetThis (vari) {
-  var logArray = [];
   var T = new Twitter(keyLink.twitKeys);
   var tweet = {
     status: (argTwo) }
@@ -72,24 +75,19 @@ function tweetThis (vari) {
         console.log("Something went wrong! Maybe try adding in text for your tweet.");
       }
       else{
+        if (liriBotTriggered) {
+          console.log("Tweet about your madness: ");
+        }
         console.log("Your tweet went through!  It has been posted to @scriptscrawler's feed.");
-        logArray.push("Account name Tweeted From: @scriptscrawler\n Tweet: " + argTwo + "\n");
-        fs.appendFile('log.txt', logArray, function (err) {
-          if (err) {
-            console.log(err);
-          } else {
-            console.log("Review the log.txt file to see a log of your actions");
-          }
-        });
+        console.log("Tweet: " + argTwo);
+        writeThis("Account name Tweeted From: @scriptscrawler\n Tweet: " + argTwo + "\n");
+        console.log("Review the log.txt file to see a log of your actions");
       }
     }
   };
   // This section will control Spotify Functionality
-
   function spotifyThis () {
     var spotify = new Spotify(keyLink.spotty);
-    var logArray = [];
-
     spotify.search({ type: 'track', query: (argTwo || "Ace of Base The Sign") }, function(err, data) {
       if (err) {
         return console.log('Error occurred: ' + err);
@@ -100,27 +98,24 @@ function tweetThis (vari) {
           // console.log(data[outside].items);
           for (var i = 0; i < (data[outside].items).length; i++) {
             var data = (data[outside].items)[i];
-            // console.log(data);
+            if (liriBotTriggered) {
+              console.log("Your music Selection: ");
+            }
             console.log("Artist: " + data.artists[0].name);
+            writeThis("Artist: " + data.artists[0].name + "\n");
             console.log("Album: " + data.album.name);
+            writeThis("Album: " + data.album.name + "\n");
             console.log("Song Name: " + data.name);
+            writeThis("Song Name: " + data.name + "\n");
             if (!(data.preview_url === null)) {
               console.log("Link to Preview: " + data.preview_url);
+              writeThis("Link to Preview: " + data.preview_url + "\n");
             }
-            console.log("Popularity Rating: " + data.popularity + "\n");
-            logArray.push("Artist: " + data.artists[0].name + "\n");
-            logArray.push("Album: " + data.album.name + "\n");
-            logArray.push("Song Name: " + data.name + "\n");
-            logArray.push("Link to Preview: " + data.preview_url + "\n");
-            logArray.push("Popularity Rating: " + data.popularity + "\n");
-            fs.appendFile('log.txt', logArray, function (err) {
-              if (err) {
-                console.log(err);
-              } else {
-                console.log("Review the log.txt file to see a log of your actions");
-              }
-            });
+            console.log("Popularity Rating: " + data.popularity);
+            writeThis("Popularity Rating: " + data.popularity + "\n");
+            console.log("Review the log.txt file to see a log of your actions");
           }
+
         };
 
       }
@@ -139,29 +134,26 @@ function tweetThis (vari) {
         console.log("I didn't find that one, please try a different title.");
       }
       else {
+        if (liriBotTriggered) {
+          console.log("Your movie Selection: ");
+        }
         console.log("Title: " + movieObj.Title);
+        writeThis("Title: " + movieObj.Title + "\n");
         console.log("Year: " + movieObj.Year);
+        writeThis("Year: " + movieObj.Year + "\n");
         console.log("Rating: " + movieObj.Rated);
+        writeThis("Rating: " + movieObj.Rated + "\n");
         console.log("Country Produced In: " + movieObj.Country);
+        writeThis("Country Produced In: " + movieObj.Country + "\n");
         console.log("Language: " + movieObj.Language);
+        writeThis("Language: " + movieObj.Language + "\n");
         console.log("Plot: " + movieObj.Plot);
+        writeThis("Plot: " + movieObj.Plot + "\n");
         console.log("Actors/Actresses: " + movieObj.Actors);
+        writeThis("Actors/Actresses: " + movieObj.Actors + "\n");
         console.log("Rotten Tomatoes URL: " + movieObj.tomatoURL);
-        logArray.push("Title: " + movieObj.Title + "\n");
-        logArray.push("Year: " + movieObj.Year + "\n");
-        logArray.push("Rating: " + movieObj.Rated + "\n");
-        logArray.push("Country Produced In: " + movieObj.Country + "\n");
-        logArray.push("Language: " + movieObj.Language + "\n");
-        logArray.push("Plot: " + movieObj.Plot + "\n");
-        logArray.push("Actors/Actresses: " + movieObj.Actors + "\n");
-        logArray.push("Rotten Tomatoes URL: " + movieObj.tomatoURL + "\n");
-        fs.appendFile('log.txt', logArray, function (err) {
-          if (err) {
-            console.log(err);
-          } else {
-            console.log("Review the log.txt file to see a log of your actions");
-          }
-        });
+        writeThis("Rotten Tomatoes URL: " + movieObj.tomatoURL + "\n");
+        console.log("Review the log.txt file to see a log of your actions");
       }
     });
 
@@ -170,6 +162,7 @@ function tweetThis (vari) {
 
   // This will contain code for the fs read to obtain text from the random.txt file
   function readFromTxt () {
+    liriBotTriggered = true;
     fs.readFile("random.txt", "utf8", function (err, data) {
       if (err) {
         return console.log(err);
@@ -177,23 +170,21 @@ function tweetThis (vari) {
       else {
         textArr = []
         textArr = data.split(", ");
+        console.log(textArr);
         argTwo = textArr[1].trim();
         argTwo = argTwo.replace(/["]+/g, '');
-        console.log("Your music Selection: ");
         spotifyThis(textArr[0].trim());
         argTwo = textArr[3].trim();
         argTwo = argTwo.replace(/["]+/g, '');
-        console.log("Your movie Selection: ");
         movieRequest(textArr[2].trim());
         argTwo = textArr[5].trim();
         argTwo = argTwo.replace(/["]+/g, '');
-        console.log("Tweet about your madness: ");
         tweetThis(textArr[4].trim());
         twitterTweetCount = 1;
-        console.log("Look, you really did Tweet it out!: ");
         whatToShow(textArr[6].trim());
         twitterTweetCount = process.argv[3] || 20;
 
       }
     });
+        liriBotTriggered = false;
   };
