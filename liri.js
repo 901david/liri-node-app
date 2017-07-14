@@ -1,9 +1,11 @@
 var argOne = process.argv[2];
 var argTwo = process.argv[3];
+var twitterTweetCount = 20;
 // This section controls Twitter Functionality
         var keyLink = require("./keys.js");
-        // console.log(process.argv);
+        var Spotify = require('node-spotify-api');
         var Twitter = require('twitter');
+        var fs = require("fs");
         // This function determines what you are entering and then performs that task
         function whatToShow (vari) {
           if (vari === "my-tweets") {
@@ -19,6 +21,9 @@ var argTwo = process.argv[3];
           else if (vari === "movie-this") {
             movieRequest();
           }
+          else if (vari === "do-what-it-says") {
+            readFromTxt();
+          }
           else {
             console.log("Not a valid command.  Try again.");
           }
@@ -26,8 +31,8 @@ var argTwo = process.argv[3];
         // This function will show my most recent tweets
         function myTweets () {
         var client = new Twitter(keyLink.twitKeys);
-
-        var params = {screen_name: 'scriptscrawler', count: 20};
+        var logArray = [];
+        var params = {screen_name: 'scriptscrawler', count: twitterTweetCount};
         client.get('statuses/user_timeline', params, function(error, tweets, response) {
           if (!error) {
             // console.log(tweets);
@@ -37,8 +42,16 @@ var argTwo = process.argv[3];
               console.log('"' + tweetData[i].text + '"');
               console.log("Tweeted out on: " + tweetData[i].created_at);
               console.log("This has been retweeted " + tweetData[i].retweet_count + " times.");
-            }
+              logArray.push("@" + tweetData[i].user.screen_name + " Tweeted Out:")
 
+            }
+            fs.appendFile('log.txt', logArray, function (err) {
+            if (err) {
+              console.log(err);
+            } else {
+              console.log("Review the log.txt file to see a log of your actions");
+            }
+          });
           }
         });
         };
@@ -61,11 +74,10 @@ var argTwo = process.argv[3];
   // This section will control Spotify Functionality
 
   function spotifyThis () {
-  var Spotify = require('node-spotify-api');
   var spotify = new Spotify(keyLink.spotty);
 
 
-  spotify.search({ type: 'track', query: (argTwo || "All the Small Things") }, function(err, data) {
+  spotify.search({ type: 'track', query: (argTwo || "Ace of Base The Sign") }, function(err, data) {
     if (err) {
       return console.log('Error occurred: ' + err);
     }
@@ -98,8 +110,9 @@ searchCrit = argTwo || "Mr.+Nobody";
 request('http://www.omdbapi.com/?apikey=40e9cece&t=' + searchCrit, function (error, response, body) {
   // console.log('error:', error); // Print the error if one occurred
   // console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-  console.log('body:', body); // Print the HTML for the Google homepage.
+  // console.log(body);
   var movieObj = JSON.parse(body);
+
   console.log("Title: " + movieObj.Title);
   console.log("Year: " + movieObj.Year);
   console.log("Rating: " + movieObj.Rated);
@@ -108,11 +121,36 @@ request('http://www.omdbapi.com/?apikey=40e9cece&t=' + searchCrit, function (err
   console.log("Plot: " + movieObj.Plot);
   console.log("Actors/Actresses: " + movieObj.Actors);
   console.log("Rotten Tomatoes: " + movieObj.imdbRating);
-
-
-
-
-
-
 });
 };
+
+
+// This will contain code for the fs read to obtain text from the random.txt file
+  function readFromTxt () {
+    fs.readFile("random.txt", "utf8", function (err, data) {
+        if (err) {
+          return console.log(err);
+        }
+        else {
+          textArr = []
+          textArr = data.split(", ");
+          argTwo = textArr[1].trim();
+          argTwo = argTwo.replace(/["]+/g, '');
+          console.log("Your music Selection: ");
+          spotifyThis(textArr[0].trim());
+          argTwo = textArr[3].trim();
+          argTwo = argTwo.replace(/["]+/g, '');
+          console.log("Your movie Selection: ");
+          movieRequest(textArr[2].trim());
+          argTwo = textArr[5].trim();
+          argTwo = argTwo.replace(/["]+/g, '');
+          console.log("Tweet about your madness: ");
+          tweetThis(textArr[4].trim());
+          twitterTweetCount = 1;
+          console.log("Look, you really did Tweet it out!: ");
+          whatToShow(textArr[6].trim());
+          twitterTweetCount = 20;
+
+        }
+    });
+  };
