@@ -1,14 +1,39 @@
+Artist: Ace of Base
+Album: The Sign (US Album) [Remastered]
+Song Name: The Sign
+Popularity Rating: 66
+Link to Preview: https://p.scdn.co/mp3-preview/4c463359f67dd3546db7294d236dd0ae991882ff?cid=e20daef331a8412aaa88172ddb0e02d9
+Artist: Lil Wayne
+Album: I Am Not A Human Being
+Song Name: Bill Gates
+Popularity Rating: 54
+Title: Mr. Nobody
+Year: 2009
+Language: English, Mohawk
+Plot: A boy stands on a station platform as a train is about to leave. Should he go with his mother or stay with his father? Infinite possibilities arise from this decision. As long as he doesn't choose, anything is possible.
+Rating: R
+Country Produced In: Belgium, Germany, Canada, France, USA, UK
+Actors/Actresses: Jared Leto, Sarah Polley, Diane Kruger, Linh Dan Pham
+Rotten Tomatoes URL: http://www.rottentomatoes.com/m/mr-nobody/
+Title: The Terminator
+Year: 1984
+Rating: R
+Country Produced In: UK, USA
+Language: English, Spanish
+Plot: A seemingly indestructible humanoid cyborg is sent from 2029 to 1984 to assassinate a waitress, whose unborn son will lead humanity in a war against the machines, while a soldier from that war is sent to protect her at all costs.
+Actors/Actresses: Arnold Schwarzenegger, Michael Biehn, Linda Hamilton, Paul Winfield
+Rotten Tomatoes URL: http://www.rottentomatoes.com/m/terminator/
 Title: Straight Outta Compton
 Year: 2015
 Country Produced In: USA
-Plot: The group NWA emerges from the mean streets of Compton in Los Angeles, California, in the mid-1980s and revolutionizes Hip Hop culture with their music and tales about life in the hood.
-Actors/Actresses: O'Shea Jackson Jr., Corey Hawkins, Jason Mitchell, Neil Brown Jr.
 Rating: R
 Language: English
+Plot: The group NWA emerges from the mean streets of Compton in Los Angeles, California, in the mid-1980s and revolutionizes Hip Hop culture with their music and tales about life in the hood.
+Actors/Actresses: O'Shea Jackson Jr., Corey Hawkins, Jason Mitchell, Neil Brown Jr.
 Rotten Tomatoes URL: http://www.rottentomatoes.com/m/straight_outta_compton/
 @scriptscrawler Tweeted Out:
-Tweeted out on: Fri Jul 14 17:32:20 +0000 2017
-"Should be last test"
+"More fun testing apps #developerlife"
+Tweeted out on: Fri Jul 14 19:41:21 +0000 2017
 This has been retweeted 0 times.
 Artist: Lil Wayne
 Album: I Am Not A Human Being

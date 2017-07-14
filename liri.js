@@ -1,6 +1,7 @@
 var argOne = process.argv[2];
 var argTwo = process.argv[3];
 var twitterTweetCount = process.argv[3] || 20;
+var tweetText;
 // This section controls Twitter Functionality
 var keyLink = require("./keys.js");
 var Spotify = require('node-spotify-api');
@@ -67,6 +68,10 @@ whatToShow (argOne);
 // This section will allow Twitter posts
 function tweetThis (vari) {
   var T = new Twitter(keyLink.twitKeys);
+  if (liriBotTriggered) {
+    argTwo = tweetText;
+  }
+  // console.log(argTwo);
   var tweet = {
     status: (argTwo) }
     T.post('statuses/update', tweet, tweeted)
@@ -124,7 +129,6 @@ function tweetThis (vari) {
   };
   function movieRequest () {
     var request = require("request");
-    var logArray = [];
     searchCrit = argTwo || "Mr.+Nobody";
     request('http://www.omdbapi.com/?apikey=40e9cece&t=' + searchCrit + `&tomatoes=true`, function (error, response, body) {
       // console.log('error:', error); // Print the error if one occurred
@@ -170,7 +174,7 @@ function tweetThis (vari) {
       else {
         textArr = []
         textArr = data.split(", ");
-        console.log(textArr);
+        // console.log(textArr);
         argTwo = textArr[1].trim();
         argTwo = argTwo.replace(/["]+/g, '');
         spotifyThis(textArr[0].trim());
@@ -179,11 +183,12 @@ function tweetThis (vari) {
         movieRequest(textArr[2].trim());
         argTwo = textArr[5].trim();
         argTwo = argTwo.replace(/["]+/g, '');
-        tweetThis(textArr[4].trim());
+        whatToShow(textArr[4].trim());
         twitterTweetCount = 1;
-        whatToShow(textArr[6].trim());
+        if (!(process.argv[4] === "")) {
+            whatToShow(textArr[6].trim());
+        }
         twitterTweetCount = process.argv[3] || 20;
-
       }
     });
         liriBotTriggered = false;
