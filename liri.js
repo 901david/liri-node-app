@@ -1,6 +1,6 @@
 var argOne = process.argv[2];
 var argTwo = process.argv[3];
-var twitterTweetCount = 20;
+var twitterTweetCount = process.argv[3] || 20;
 // This section controls Twitter Functionality
         var keyLink = require("./keys.js");
         var Spotify = require('node-spotify-api');
@@ -62,6 +62,7 @@ var twitterTweetCount = 20;
         whatToShow (argOne);
 // This section will allow Twitter posts
       function tweetThis (vari) {
+        var logArray = [];
         var T = new Twitter(keyLink.twitKeys);
         var tweet = {
         status: (argTwo) }
@@ -72,6 +73,14 @@ var twitterTweetCount = 20;
         }
         else{
         console.log("Your tweet went through!  It has been posted to @scriptscrawler's feed.");
+        logArray.push("Account name Tweeted From: @scriptscrawler\n Tweet: " + argTwo + "\n");
+        fs.appendFile('log.txt', logArray, function (err) {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("Review the log.txt file to see a log of your actions");
+        }
+      });
         }
         }
       };
@@ -85,6 +94,7 @@ var twitterTweetCount = 20;
     if (err) {
       return console.log('Error occurred: ' + err);
     }
+    else {
     var entireObject = data;
     for (var outside in data) {
       // console.log(data[outside].items);
@@ -102,9 +112,7 @@ var twitterTweetCount = 20;
 
       }
     };
-
-    // console.log(entireObject);
-
+  }
   });
 
 };
@@ -114,9 +122,11 @@ searchCrit = argTwo || "Mr.+Nobody";
 request('http://www.omdbapi.com/?apikey=40e9cece&t=' + searchCrit + `&tomatoes=true`, function (error, response, body) {
   // console.log('error:', error); // Print the error if one occurred
   // console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-  console.log(body);
   var movieObj = JSON.parse(body);
-
+  if (movieObj.Title === undefined && movieObj.Plot === undefined) {
+    console.log("I didn't find that one, please try a different title.");
+  }
+  else {
   console.log("Title: " + movieObj.Title);
   console.log("Year: " + movieObj.Year);
   console.log("Rating: " + movieObj.Rated);
@@ -125,6 +135,7 @@ request('http://www.omdbapi.com/?apikey=40e9cece&t=' + searchCrit + `&tomatoes=t
   console.log("Plot: " + movieObj.Plot);
   console.log("Actors/Actresses: " + movieObj.Actors);
   console.log("Rotten Tomatoes URL: " + movieObj.tomatoURL);
+  }
 });
 };
 
@@ -153,7 +164,7 @@ request('http://www.omdbapi.com/?apikey=40e9cece&t=' + searchCrit + `&tomatoes=t
           twitterTweetCount = 1;
           console.log("Look, you really did Tweet it out!: ");
           whatToShow(textArr[6].trim());
-          twitterTweetCount = 20;
+          twitterTweetCount = process.argv[3] || 20;
 
         }
     });
