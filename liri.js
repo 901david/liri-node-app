@@ -6,8 +6,8 @@ var tweetText;
 var keyLink = require("./keys.js");
 var Spotify = require('node-spotify-api');
 var Twitter = require('twitter');
+var request = require("request");
 var fs = require("fs");
-var liriBotTriggered = false;
 // This function will write items to teh log.txt
 function writeThis (textArg) {
   fs.appendFile('log.txt', textArg, function (err) {
@@ -47,10 +47,8 @@ function myTweets () {
     if (!error) {
       // console.log(tweets);
       var tweetData = tweets;
-      if (liriBotTriggered) {
-        console.log("Look you really did Tweet it out: ");
-      }
       for (var i = 0; i < tweetData.length; i++) {
+        console.log("Recently Tweeted:  ");
         console.log("@" + tweetData[i].user.screen_name + " Tweeted Out:");
         writeThis("@" + tweetData[i].user.screen_name + " Tweeted Out:\n");
         console.log('"' + tweetData[i].text + '"');
@@ -68,10 +66,6 @@ whatToShow (argOne);
 // This section will allow Twitter posts
 function tweetThis (vari) {
   var T = new Twitter(keyLink.twitKeys);
-  if (liriBotTriggered) {
-    argTwo = tweetText;
-  }
-  // console.log(argTwo);
   var tweet = {
     status: (argTwo) }
     T.post('statuses/update', tweet, tweeted)
@@ -80,9 +74,6 @@ function tweetThis (vari) {
         console.log("Something went wrong! Maybe try adding in text for your tweet.");
       }
       else{
-        if (liriBotTriggered) {
-          console.log("Tweet about your madness: ");
-        }
         console.log("Your tweet went through!  It has been posted to @scriptscrawler's feed.");
         console.log("Tweet: " + argTwo);
         writeThis("Account name Tweeted From: @scriptscrawler\n Tweet: " + argTwo + "\n");
@@ -99,13 +90,11 @@ function tweetThis (vari) {
       }
       else {
         var entireObject = data;
+          console.log("Your Music Selection: ");
         for (var outside in data) {
           // console.log(data[outside].items);
           for (var i = 0; i < (data[outside].items).length; i++) {
             var data = (data[outside].items)[i];
-            if (liriBotTriggered) {
-              console.log("Your music Selection: ");
-            }
             console.log("Artist: " + data.artists[0].name);
             writeThis("Artist: " + data.artists[0].name + "\n");
             console.log("Album: " + data.album.name);
@@ -128,19 +117,14 @@ function tweetThis (vari) {
 
   };
   function movieRequest () {
-    var request = require("request");
     searchCrit = argTwo || "Mr.+Nobody";
     request('http://www.omdbapi.com/?apikey=40e9cece&t=' + searchCrit + `&tomatoes=true`, function (error, response, body) {
-      // console.log('error:', error); // Print the error if one occurred
-      // console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
       var movieObj = JSON.parse(body);
       if (movieObj.Title === undefined && movieObj.Plot === undefined) {
         console.log("I didn't find that one, please try a different title.");
       }
       else {
-        if (liriBotTriggered) {
-          console.log("Your movie Selection: ");
-        }
+        console.log("Your movie Selection: ");
         console.log("Title: " + movieObj.Title);
         writeThis("Title: " + movieObj.Title + "\n");
         console.log("Year: " + movieObj.Year);
@@ -166,7 +150,6 @@ function tweetThis (vari) {
 
   // This will contain code for the fs read to obtain text from the random.txt file
   function readFromTxt () {
-    liriBotTriggered = true;
     fs.readFile("random.txt", "utf8", function (err, data) {
       if (err) {
         return console.log(err);
@@ -177,10 +160,10 @@ function tweetThis (vari) {
         // console.log(textArr);
         argTwo = textArr[1].trim();
         argTwo = argTwo.replace(/["]+/g, '');
-        spotifyThis(textArr[0].trim());
+        whatToShow(textArr[0].trim());
         argTwo = textArr[3].trim();
         argTwo = argTwo.replace(/["]+/g, '');
-        movieRequest(textArr[2].trim());
+        whatToShow(textArr[2].trim());
         argTwo = textArr[5].trim();
         argTwo = argTwo.replace(/["]+/g, '');
         whatToShow(textArr[4].trim());
@@ -191,5 +174,5 @@ function tweetThis (vari) {
         twitterTweetCount = process.argv[3] || 20;
       }
     });
-        liriBotTriggered = false;
+
   };
