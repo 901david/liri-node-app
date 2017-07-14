@@ -48,7 +48,7 @@ var twitterTweetCount = 20;
               logArray.push("This has been retweeted " + tweetData[i].retweet_count + " times.\n")
 
             }
-            
+
             fs.appendFile('log.txt', logArray, function (err) {
             if (err) {
               console.log(err);
@@ -111,10 +111,10 @@ var twitterTweetCount = 20;
 function movieRequest () {
 var request = require("request");
 searchCrit = argTwo || "Mr.+Nobody";
-request('http://www.omdbapi.com/?apikey=40e9cece&t=' + searchCrit, function (error, response, body) {
+request('http://www.omdbapi.com/?apikey=40e9cece&t=' + searchCrit + `&tomatoes=true`, function (error, response, body) {
   // console.log('error:', error); // Print the error if one occurred
   // console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-  // console.log(body);
+  console.log(body);
   var movieObj = JSON.parse(body);
 
   console.log("Title: " + movieObj.Title);
@@ -124,7 +124,7 @@ request('http://www.omdbapi.com/?apikey=40e9cece&t=' + searchCrit, function (err
   console.log("Language: " + movieObj.Language);
   console.log("Plot: " + movieObj.Plot);
   console.log("Actors/Actresses: " + movieObj.Actors);
-  console.log("Rotten Tomatoes: " + movieObj.imdbRating);
+  console.log("Rotten Tomatoes URL: " + movieObj.tomatoURL);
 });
 };
 
