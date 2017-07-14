@@ -113,21 +113,23 @@ function tweetThis (vari) {
             logArray.push("Song Name: " + data.name + "\n");
             logArray.push("Link to Preview: " + data.preview_url + "\n");
             logArray.push("Popularity Rating: " + data.popularity + "\n");
+            fs.appendFile('log.txt', logArray, function (err) {
+              if (err) {
+                console.log(err);
+              } else {
+                console.log("Review the log.txt file to see a log of your actions");
+              }
+            });
           }
         };
-        fs.appendFile('log.txt', logArray, function (err) {
-          if (err) {
-            console.log(err);
-          } else {
-            console.log("Review the log.txt file to see a log of your actions");
-          }
-        });
+
       }
     });
 
   };
   function movieRequest () {
     var request = require("request");
+    var logArray = [];
     searchCrit = argTwo || "Mr.+Nobody";
     request('http://www.omdbapi.com/?apikey=40e9cece&t=' + searchCrit + `&tomatoes=true`, function (error, response, body) {
       // console.log('error:', error); // Print the error if one occurred
@@ -145,8 +147,24 @@ function tweetThis (vari) {
         console.log("Plot: " + movieObj.Plot);
         console.log("Actors/Actresses: " + movieObj.Actors);
         console.log("Rotten Tomatoes URL: " + movieObj.tomatoURL);
+        logArray.push("Title: " + movieObj.Title + "\n");
+        logArray.push("Year: " + movieObj.Year + "\n");
+        logArray.push("Rating: " + movieObj.Rated + "\n");
+        logArray.push("Country Produced In: " + movieObj.Country + "\n");
+        logArray.push("Language: " + movieObj.Language + "\n");
+        logArray.push("Plot: " + movieObj.Plot + "\n");
+        logArray.push("Actors/Actresses: " + movieObj.Actors + "\n");
+        logArray.push("Rotten Tomatoes URL: " + movieObj.tomatoURL + "\n");
+        fs.appendFile('log.txt', logArray, function (err) {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log("Review the log.txt file to see a log of your actions");
+          }
+        });
       }
     });
+
   };
 
 
