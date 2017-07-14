@@ -68,7 +68,7 @@ function myTweets () {
 };
 whatToShow (argOne);
 // This section will allow Twitter posts
-function tweetThis (vari) {
+function tweetThis () {
   var T = new Twitter(keyLink.twitKeys);
   var tweet = {
     status: (argTwo) }

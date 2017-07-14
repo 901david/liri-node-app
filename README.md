@@ -11,4 +11,4 @@ node liri movie-this  - Searches for a default movie and provides info about it.
 node liri movie-this "<movie title>" - Searches for a specific movie and provides info
 node liri spotify-this-song  - Searches for a default song on spotify and displays results
 node liri spotify-this-song "<song name>"  - This searches for a specific song and displays results
-node liri do-what-it-says  - This pulls prefilled text from a .txt file and uses that data to choose a movie, song, and to tweet out about it.
+node liri do-what-it-says  - This pulls prefilled text from a .txt file and uses that data to choose a movie, song, and to tweet out a random message.
