@@ -6,6 +6,7 @@ Commands Accept:
 
 node liri my-tweets  - This command will show the last 2o tweets from @scriptscrawler
 node liri my-tweets "<number of tweets to show>"  - This command allows you to choose how many of the last tweets you want shown.
+argTwo || randTweet  - Tweets out a random phrase.
 node liri tweet-this "<tweet message>"  - This command allows you to send out a tweet from @scriptscrawler
 node liri movie-this  - Searches for a default movie and provides info about it.
 node liri movie-this "<movie title>" - Searches for a specific movie and provides info

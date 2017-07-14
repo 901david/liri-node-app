@@ -2,7 +2,7 @@ var argOne = process.argv[2];
 var argTwo = process.argv[3];
 var twitterTweetCount = process.argv[3] || 20;
 var tweetText;
-var randTweetArray = ["So epic - loving it music & movies #thelife", "Diggin Lil Wayne music #weezy", "Eazy-E killin it in Straight Outta Compton #epicmovie", "Wish I was even half as hard as Suge Knight"]
+var randTweetArray = ["So epic - loving it music & movies #thelife", "Diggin Lil Wayne music #weezy", "Eazy-E killin it in Straight Outta Compton #epicmovie", "Wish I was even half as hard as Suge Knight #StraightouttaCompton", "Weezy going hard in the paint #baller", "Used to be ballin, but now I'm Bill Gatin' #richlife", "#paymewhatimworth #weezy #givememymoney", "Movies & Music - go together like apple pie and ice cream", "Straight baller #ballerstatus", "Kanye is truly a gay fish #southparkcallsitright", "Sending out tweets like it is going out of style"]
 var randTweet = randTweetArray [Math.floor(Math.random()
   * randTweetArray.length)];
   var waitForTweet = 0;
@@ -70,8 +70,9 @@ whatToShow (argOne);
 // This section will allow Twitter posts
 function tweetThis () {
   var T = new Twitter(keyLink.twitKeys);
+  var status = argTwo || randTweet
   var tweet = {
-    status: (argTwo) }
+    status: (status) }
     T.post('statuses/update', tweet, tweeted)
     function tweeted(err, data, response) {
       if(err){
@@ -80,7 +81,7 @@ function tweetThis () {
       }
       else{
         console.log("Your tweet went through!  It has been posted to @scriptscrawler's feed.");
-        console.log("Tweet: " + argTwo);
+        console.log("Tweet: " + status);
         writeThis("Account name Tweeted From: @scriptscrawler\n Tweet: " + argTwo + "\n");
         console.log("Review the log.txt file to see a log of your actions");
         if (waitForTweet === 1) {
