@@ -1,1 +1,1 @@
-spotify-this-song, "Bill Gates", movie-this, "Straight Outta Compton", tweet-this, "YEAH! Listening to Lil Wayne & watching Straight Outta Compton #GANGSTA", my-tweets
+spotify-this-song, "Bill Gates", movie-this, "Straight Outta Compton", tweet-this

@@ -2,6 +2,10 @@ var argOne = process.argv[2];
 var argTwo = process.argv[3];
 var twitterTweetCount = process.argv[3] || 20;
 var tweetText;
+var randTweetArray = ["So epic - loving it music & movies #thelife", "Diggin Lil Wayne music #weezy", "Eazy-E killin it in Straight Outta Compton #epicmovie", "Wish I was even half as hard as Suge Knight"]
+var randTweet = randTweetArray [Math.floor(Math.random()
+  * randTweetArray.length)];
+  var waitForTweet = 0;
 // This section controls Twitter Functionality
 var keyLink = require("./keys.js");
 var Spotify = require('node-spotify-api');
@@ -71,6 +75,7 @@ function tweetThis (vari) {
     T.post('statuses/update', tweet, tweeted)
     function tweeted(err, data, response) {
       if(err){
+        console.log(err);
         console.log("Something went wrong! Maybe try adding in text for your tweet.");
       }
       else{
@@ -78,6 +83,12 @@ function tweetThis (vari) {
         console.log("Tweet: " + argTwo);
         writeThis("Account name Tweeted From: @scriptscrawler\n Tweet: " + argTwo + "\n");
         console.log("Review the log.txt file to see a log of your actions");
+        if (waitForTweet === 1) {
+              twitterTweetCount = 1;
+              whatToShow("my-tweets");
+
+          twitterTweetCount = process.argv[3] || 20;
+        }
       }
     }
   };
@@ -150,6 +161,7 @@ function tweetThis (vari) {
 
   // This will contain code for the fs read to obtain text from the random.txt file
   function readFromTxt () {
+    waitForTweet = 1;
     fs.readFile("random.txt", "utf8", function (err, data) {
       if (err) {
         return console.log(err);
@@ -164,14 +176,8 @@ function tweetThis (vari) {
         argTwo = textArr[3].trim();
         argTwo = argTwo.replace(/["]+/g, '');
         whatToShow(textArr[2].trim());
-        argTwo = textArr[5].trim();
-        argTwo = argTwo.replace(/["]+/g, '');
+        argTwo = randTweet;
         whatToShow(textArr[4].trim());
-        twitterTweetCount = 1;
-        if (!(process.argv[4] === "")) {
-            whatToShow(textArr[6].trim());
-        }
-        twitterTweetCount = process.argv[3] || 20;
       }
     });
 
