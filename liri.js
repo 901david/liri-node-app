@@ -65,7 +65,12 @@ var randTweet = randTweetArray [Math.floor(Math.random()
           console.log("This has been retweeted " + tweetData[i].retweet_count + " times.");
           writeThis("This has been retweeted " + tweetData[i].retweet_count + " times.\n");
         }
+        if (waitForTweet === 1) {
+          console.log("");
+        }
+        else {
         console.log("Review the log.txt file to see a log of your actions");
+      }
       }
     });
   };
@@ -87,7 +92,12 @@ var randTweet = randTweetArray [Math.floor(Math.random()
           console.log("Tweet: " + status);
           writeThis("\nThis entry was entered: " + moment().format('MMMM Do YYYY, h:mm:ss a') + "\n");
           writeThis("Account name Tweeted From: @scriptscrawler\n Tweet: " + status + "\n");
+          if (waitForTweet === 1) {
+            console.log("");
+          }
+          else {
           console.log("Review the log.txt file to see a log of your actions");
+        }
           if (waitForTweet === 1) {
             twitterTweetCount = 1;
             whatToShow("my-tweets");
@@ -123,7 +133,12 @@ var randTweet = randTweetArray [Math.floor(Math.random()
             }
             console.log("Popularity Rating: " + data.popularity);
             writeThis("Popularity Rating: " + data.popularity + "\n");
+            if (waitForTweet === 1) {
+              console.log("Review the log.txt file to see a log of your actions");
+            }
+            else {
             console.log("Review the log.txt file to see a log of your actions");
+          }
 
 
           };
@@ -159,7 +174,12 @@ var randTweet = randTweetArray [Math.floor(Math.random()
           writeThis("Actors/Actresses: " + movieObj.Actors + "\n");
           console.log("Rotten Tomatoes URL: " + movieObj.tomatoURL);
           writeThis("Rotten Tomatoes URL: " + movieObj.tomatoURL + "\n");
+          if (waitForTweet === 1) {
+            console.log("");
+          }
+          else {
           console.log("Review the log.txt file to see a log of your actions");
+        }
         }
       });
 
