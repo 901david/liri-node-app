@@ -11,4 +11,4 @@ Commands Accepted:
 \nnode liri movie-this "<movie title>" - Searches for a specific movie and provides info
 \nnode liri spotify-this-song  - Searches for a default song on spotify and displays results
 \nnode liri spotify-this-song "<song name>"  - This searches for a specific song and displays results
-\nnode liri do-what-it-says  - This pulls prefilled text from a .txt file and uses that data to choose a movie, song, and to tweet out a random message.
+\nnode liri do-what-it-says  - This pulls prefilled text from a .txt file and uses that data to choose a movie, song, and to tweet out a random message, then show you that you actually did tweet it out.
