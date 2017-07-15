@@ -11,6 +11,7 @@ var keyLink = require("./keys.js");
 var Spotify = require('node-spotify-api');
 var Twitter = require('twitter');
 var request = require("request");
+var moment = require('moment');
 var fs = require("fs");
 // This function will write items to teh log.txt
 function writeThis (textArg) {
@@ -52,7 +53,9 @@ function myTweets () {
       // console.log(tweets);
       var tweetData = tweets;
       for (var i = 0; i < tweetData.length; i++) {
+        writeThis("\nThis entry was entered: " + moment().format('MMMM Do YYYY, h:mm:ss a') + "\n");
         console.log("Recently Tweeted:  ");
+        writeThis("Recently Tweeted:  \n");
         console.log("@" + tweetData[i].user.screen_name + " Tweeted Out:");
         writeThis("@" + tweetData[i].user.screen_name + " Tweeted Out:\n");
         console.log('"' + tweetData[i].text + '"');
@@ -82,7 +85,8 @@ function tweetThis () {
       else{
         console.log("Your tweet went through!  It has been posted to @scriptscrawler's feed.");
         console.log("Tweet: " + status);
-        writeThis("Account name Tweeted From: @scriptscrawler\n Tweet: " + argTwo + "\n");
+        writeThis("\nThis entry was entered: " + moment().format('MMMM Do YYYY, h:mm:ss a') + "\n");
+        writeThis("Account name Tweeted From: @scriptscrawler\n Tweet: " + status + "\n");
         console.log("Review the log.txt file to see a log of your actions");
         if (waitForTweet === 1) {
               twitterTweetCount = 1;
@@ -102,7 +106,9 @@ function tweetThis () {
       }
       else {
         var entireObject = data;
+          writeThis("\nThis entry was entered: " + moment().format('MMMM Do YYYY, h:mm:ss a') + "\n");
           console.log("Your Music Selection: ");
+          writeThis("Your Music Selection: \n");
         for (var outside in data) {
           // console.log(data[outside].items);
           for (var i = 0; i < (data[outside].items).length; i++) {
@@ -136,7 +142,9 @@ function tweetThis () {
         console.log("I didn't find that one, please try a different title.");
       }
       else {
+        writeThis("\nThis entry was entered: " + moment().format('MMMM Do YYYY, h:mm:ss a') + "\n");
         console.log("Your movie Selection: ");
+        writeThis("Your movie Selection: \n");
         console.log("Title: " + movieObj.Title);
         writeThis("Title: " + movieObj.Title + "\n");
         console.log("Year: " + movieObj.Year);
