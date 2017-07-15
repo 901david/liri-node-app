@@ -4,7 +4,7 @@ This app will take several different commands and allow you to grab some informa
 
 Commands Accepted:
 
-node liri my-tweets "<number of tweets to show>"  - This command allows you to choose how many of the last tweets you want shown.
+node liri my-tweets '<number of tweets to show>'  - This command allows you to choose how many of the last tweets you want shown.
 node liri tweet-this  - Tweets out a random phrase.
 node liri tweet-this "<tweet message>"  - This command allows you to send out a tweet from @scriptscrawler
 node liri movie-this  - Searches for a default movie and provides info about it.
