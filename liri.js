@@ -110,8 +110,7 @@ function tweetThis () {
           console.log("Your Music Selection: ");
           writeThis("Your Music Selection: \n");
         for (var outside in data) {
-          for (var i = 0; i < 1; i++) {
-            var data = (data[outside].items)[i];
+            var data = (data[outside].items)[0];
             console.log("Artist: " + data.artists[0].name);
             writeThis("Artist: " + data.artists[0].name + "\n");
             console.log("Album: " + data.album.name);
@@ -125,7 +124,7 @@ function tweetThis () {
             console.log("Popularity Rating: " + data.popularity);
             writeThis("Popularity Rating: " + data.popularity + "\n");
             console.log("Review the log.txt file to see a log of your actions");
-          }
+
 
         };
 
