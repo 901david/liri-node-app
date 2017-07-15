@@ -110,8 +110,7 @@ function tweetThis () {
           console.log("Your Music Selection: ");
           writeThis("Your Music Selection: \n");
         for (var outside in data) {
-          // console.log(data[outside].items);
-          for (var i = 0; i < (data[outside].items).length; i++) {
+          for (var i = 0; i < 1; i++) {
             var data = (data[outside].items)[i];
             console.log("Artist: " + data.artists[0].name);
             writeThis("Artist: " + data.artists[0].name + "\n");
