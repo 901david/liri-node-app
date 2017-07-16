@@ -45,13 +45,12 @@ var randTweet = randTweetArray [Math.floor(Math.random()
   };
   // This function will show my most recent tweets
   function myTweets () {
-    var client = new Twitter(keyLink.twitKeys);
-    var logArray = [];
-    var params = {screen_name: 'scriptscrawler', count: twitterTweetCount};
+    let client = new Twitter(keyLink.twitKeys);
+    let params = {screen_name: 'scriptscrawler', count: twitterTweetCount};
     client.get('statuses/user_timeline', params, function(error, tweets, response) {
       if (!error) {
         // console.log(tweets);
-        var tweetData = tweets;
+        let tweetData = tweets;
         for (var i = 0; i < tweetData.length; i++) {
           writeThis("\nThis entry was entered: " + moment().format('MMMM Do YYYY, h:mm:ss a') + "\n");
           console.log("Recently Tweeted:  ");
@@ -77,9 +76,9 @@ var randTweet = randTweetArray [Math.floor(Math.random()
   whatToShow (argOne);
   // This section will allow Twitter posts
   function tweetThis () {
-    var T = new Twitter(keyLink.twitKeys);
-    var status = argTwo || randTweet
-    var tweet = {
+    let T = new Twitter(keyLink.twitKeys);
+    let status = argTwo || randTweet
+    let tweet = {
       status: (status) }
       T.post('statuses/update', tweet, tweeted)
       function tweeted(err, data, response) {
@@ -109,13 +108,13 @@ var randTweet = randTweetArray [Math.floor(Math.random()
     };
     // This section will control Spotify Functionality
     function spotifyThis () {
-      var spotify = new Spotify(keyLink.spotty);
+      let spotify = new Spotify(keyLink.spotty);
       spotify.search({ type: 'track', query: (argTwo || "Ace of Base The Sign") }, function(err, data) {
         if (err) {
           return console.log('Error occurred: ' + err);
         }
         else {
-          var entireObject = data;
+          let entireObject = data;
           writeThis("\nThis entry was entered: " + moment().format('MMMM Do YYYY, h:mm:ss a') + "\n");
           console.log("Your Music Selection: ");
           writeThis("Your Music Selection: \n");
@@ -150,7 +149,7 @@ var randTweet = randTweetArray [Math.floor(Math.random()
     function movieRequest () {
       searchCrit = argTwo || "Mr.+Nobody";
       request('http://www.omdbapi.com/?apikey=40e9cece&t=' + searchCrit + `&tomatoes=true`, function (error, response, body) {
-        var movieObj = JSON.parse(body);
+        let movieObj = JSON.parse(body);
         if (movieObj.Title === undefined && movieObj.Plot === undefined) {
           console.log("I didn't find that one, please try a different title.");
         }
