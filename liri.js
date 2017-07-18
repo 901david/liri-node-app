@@ -1,5 +1,5 @@
 var argOne = process.argv[2];
-var argTwo = process.argv[3];
+var argTwo = process.argv.slice(3).join(" ");
 
 var twitterTweetCount = process.argv[3] || 20;
 var tweetText;
