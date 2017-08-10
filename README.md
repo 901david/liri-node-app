@@ -12,3 +12,5 @@ node liri movie-this <movie title> - Searches for a specific movie and provides 
 node liri spotify-this-song  - Searches for a default song on spotify and displays results<br />
 node liri spotify-this-song <song name>  - This searches for a specific song and displays results..<br />
 node liri do-what-it-says  - This pulls prefilled text from a .txt file and uses that data to choose a movie, song, and to tweet out a random message, then show you that you actually did tweet it out.<br />
+
+Side note - To be able to use this app, if you wanted to fork it and use it for yourself then you will have to insert your keys for Twitter and Spotify.
