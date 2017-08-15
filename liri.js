@@ -1,20 +1,20 @@
-var argOne = process.argv[2];
+// Dependencies
+var keyLink = require("./keys.js");
+var Spotify = require('node-spotify-api');
+var Twitter = require('twitter');
+var request = require("request");
+var moment = require('moment');
+var fs = require("fs");
+// variable definitions
 var argTwo = process.argv.slice(3).join(" ");
-
 var twitterTweetCount = process.argv[3] || 20;
 var tweetText;
-var randTweetArray = ["So epic - loving it music & movies #thelife", "Diggin Lil Wayne music #weezy", "Eazy-E killin it in Straight Outta Compton #epicmovie", "Wish I was even half as hard as Suge Knight #StraightouttaCompton", "Weezy going hard in the paint #baller", "Used to be ballin, but now I'm Bill Gatin' #richlife", "#paymewhatimworth #weezy #givememymoney", "Movies & Music - go together like apple pie and ice cream", "Straight baller #ballerstatus", "Kanye is truly a gay fish #southparkcallsitright", "Sending out tweets like it is going out of style", "Red Bull gives you wings @scriptscrawler has #wings", "Coding is too fun #randomTweet", "My twitterBot is more fun than yours! #NODEJS", "Autopilot coming soon.... #tesla", "#sugeKnight Snapping Necks & Cashing Checks #getMoney", "https://68.media.tumblr.com/5cb56bf5bbf1a9705309fc00e1722832/tumblr_nu4s4uvPle1u117t6o1_500.gif", "https://media.giphy.com/media/jOcuB3dwIZ9Go/giphy.gif", "https://media.giphy.com/media/qZlcObOHSXwm4/giphy.gif", "https://media.giphy.com/media/c2jpiUBZYY024/source.gif", "https://68.media.tumblr.com/ed728a4047398565d644d07abe185ffc/tumblr_npwrcxy9v71txufzyo1_400.gif"];
 var randTweet = randTweetArray [Math.floor(Math.random()
   * randTweetArray.length)];
   var waitForTweet = 0;
-  // This section controls Twitter Functionality
-  var keyLink = require("./keys.js");
-  var Spotify = require('node-spotify-api');
-  var Twitter = require('twitter');
-  var request = require("request");
-  var moment = require('moment');
-  var fs = require("fs");
-  // This function will write items to teh log.txt
+
+  var randTweetArray = ["So epic - loving it music & movies #thelife", "Diggin Lil Wayne music #weezy", "Eazy-E killin it in Straight Outta Compton #epicmovie", "Wish I was even half as hard as Suge Knight #StraightouttaCompton", "Weezy going hard in the paint #baller", "Used to be ballin, but now I'm Bill Gatin' #richlife", "#paymewhatimworth #weezy #givememymoney", "Movies & Music - go together like apple pie and ice cream", "Straight baller #ballerstatus", "Kanye is truly a gay fish #southparkcallsitright", "Sending out tweets like it is going out of style", "Red Bull gives you wings @scriptscrawler has #wings", "Coding is too fun #randomTweet", "My twitterBot is more fun than yours! #NODEJS", "Autopilot coming soon.... #tesla", "#sugeKnight Snapping Necks & Cashing Checks #getMoney", "https://68.media.tumblr.com/5cb56bf5bbf1a9705309fc00e1722832/tumblr_nu4s4uvPle1u117t6o1_500.gif", "https://media.giphy.com/media/jOcuB3dwIZ9Go/giphy.gif", "https://media.giphy.com/media/qZlcObOHSXwm4/giphy.gif", "https://media.giphy.com/media/c2jpiUBZYY024/source.gif", "https://68.media.tumblr.com/ed728a4047398565d644d07abe185ffc/tumblr_npwrcxy9v71txufzyo1_400.gif"];
+  // This function will write items to the log.txt
   function writeThis (textArg) {
     fs.appendFile('log.txt', textArg, function (err) {
       if (err) {
@@ -23,22 +23,22 @@ var randTweet = randTweetArray [Math.floor(Math.random()
     });
   };
   // This function determines what you are entering and then performs that task
-  function whatToShow (vari) {
-    console.log(argTwo);
-    if (vari === "my-tweets") {
+  function whatToShow () {
+    let argOne = process.argv[2];
+    if (argOne === "my-tweets") {
       myTweets();
     }
-    else if (vari === "tweet-this") {
+    else if (argOne === "tweet-this") {
       tweetThis();
 
     }
-    else if (vari === "spotify-this-song") {
+    else if (argOne === "spotify-this-song") {
       spotifyThis();
     }
-    else if (vari === "movie-this") {
+    else if (argOne === "movie-this") {
       movieRequest();
     }
-    else if (vari === "do-what-it-says") {
+    else if (argOne === "do-what-it-says") {
       readFromTxt();
     }
     else {
@@ -75,7 +75,8 @@ var randTweet = randTweetArray [Math.floor(Math.random()
       }
     });
   };
-  whatToShow (argOne);
+  // Setting up what function should be called
+  whatToShow ();
   // This section will allow Twitter posts
   function tweetThis () {
     let T = new Twitter(keyLink.twitKeys);
@@ -148,6 +149,7 @@ var randTweet = randTweetArray [Math.floor(Math.random()
       });
 
     };
+    // This section controls movie requests
     function movieRequest () {
       searchCrit = argTwo || "Mr.+Nobody";
       request('http://www.omdbapi.com/?apikey=40e9cece&t=' + searchCrit + `&tomatoes=true`, function (error, response, body) {
